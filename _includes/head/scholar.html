@@ -1,0 +1,46 @@
+{% comment %}
+  Google Scholar (Highwire Press) meta tags and schema.org ScholarlyArticle JSON-LD.
+  Emitted only for pages in the publications collection; all values come from front matter.
+  See CLAUDE.md for the field definitions.
+{% endcomment %}
+{% if page.collection == "publications" %}
+{% assign abs_url = page.url | prepend: site.url %}
+<meta name="citation_title" content="{{ page.title | escape }}">
+{% for a in page.authors %}<meta name="citation_author" content="{{ a | escape }}">
+{% endfor %}<meta name="citation_publication_date" content="{{ page.citation_date }}">
+{% if page.citation_online_date %}<meta name="citation_online_date" content="{{ page.citation_online_date }}">{% endif %}
+{% if page.category == "conferences" %}<meta name="citation_conference_title" content="{{ page.venue | escape }}">{% else %}<meta name="citation_journal_title" content="{{ page.venue | escape }}">{% endif %}
+{% if page.publisher %}<meta name="citation_publisher" content="{{ page.publisher | escape }}">{% endif %}
+{% if page.volume %}<meta name="citation_volume" content="{{ page.volume }}">{% endif %}
+{% if page.issue %}<meta name="citation_issue" content="{{ page.issue }}">{% endif %}
+{% if page.firstpage %}<meta name="citation_firstpage" content="{{ page.firstpage }}">{% endif %}
+{% if page.lastpage %}<meta name="citation_lastpage" content="{{ page.lastpage }}">{% endif %}
+<meta name="citation_doi" content="{{ page.doi }}">
+{% if page.pdf %}<meta name="citation_pdf_url" content="{{ page.pdf | prepend: site.url }}">{% endif %}
+<meta name="citation_abstract_html_url" content="{{ abs_url }}">
+{% if page.keywords %}<meta name="citation_keywords" content="{{ page.keywords | join: '; ' | escape }}">{% endif %}
+<meta name="citation_language" content="en">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "headline": {{ page.title | jsonify }},
+  "name": {{ page.title | jsonify }},
+  "author": [{% for a in page.authors %}{% assign parts = a | split: ", " %}
+    {"@type": "Person", "name": {{ parts[1] | append: " " | append: parts[0] | jsonify }}{% if a == site.author.scholar_name %}, "url": {{ site.url | jsonify }}, "sameAs": {{ site.social.links | jsonify }}{% endif %}}{% unless forloop.last %},{% endunless %}{% endfor %}
+  ],
+  "datePublished": {{ page.citation_date | replace: "/", "-" | jsonify }},
+  "isPartOf": {"@type": {% if page.category == "conferences" %}"Book"{% else %}"Periodical"{% endif %}, "name": {{ page.venue | jsonify }}{% if page.volume %}, "volumeNumber": {{ page.volume | jsonify }}{% endif %}},
+  {% if page.publisher %}"publisher": {"@type": "Organization", "name": {{ page.publisher | jsonify }}},{% endif %}
+  {% if page.firstpage %}"pageStart": {{ page.firstpage | jsonify }},{% endif %}
+  {% if page.lastpage %}"pageEnd": {{ page.lastpage | jsonify }},{% endif %}
+  "identifier": {"@type": "PropertyValue", "propertyID": "DOI", "value": {{ page.doi | jsonify }}},
+  "sameAs": {{ page.doi | prepend: "https://doi.org/" | jsonify }},
+  "url": {{ abs_url | jsonify }},
+  {% if page.keywords %}"keywords": {{ page.keywords | join: ", " | jsonify }},{% endif %}
+  {% if page.pdf %}"encoding": {"@type": "MediaObject", "encodingFormat": "application/pdf", "contentUrl": {{ page.pdf | prepend: site.url | jsonify }}},{% endif %}
+  "abstract": {{ page.abstract | strip | jsonify }},
+  "description": {{ page.excerpt | strip_html | strip | jsonify }}
+}
+</script>
+{% endif %}

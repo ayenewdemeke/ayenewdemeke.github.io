@@ -9,40 +9,41 @@
 # Basic Site Settings
 locale                   : "en-US"
 site_theme               : "default" # The available themes options are "default", "air", "sunrise", "mint", "dirt" and "contrast"
-title                    : "Your Name / Site Title"
+title                    : "Ayenew Yihune Demeke"
 title_separator          : "-"
-name                     : &name "Your Name"
-description              : &description "Your Name's academic portfolio"   # Update this with a general description of your site, this is the default if not overridden by a page
-url                      : https://academicpages.github.io # The base hostname & protocol for your site e.g. "https://[your GitHub username].github.io",
+name                     : &name "Ayenew Yihune Demeke"
+description              : &description "Ayenew Yihune Demeke, PhD student in Civil, Construction and Environmental Engineering at North Dakota State University. Research on construction automation, IoT, BIM, and reality capture, including work zone safety, proximity detection, and intrusion detection."
+url                      : https://ayenewdemeke.me
                                                            # or if you already have some other page hosted on Github then use "https://[your GitHub username].github.io/[Your Repo Name]"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
-repository               : "academicpages/academicpages.github.io"
+repository               : "ayenewdemeke/ayenewdemeke.github.io"
 
 # Site Author - The following control what appear as part of the author content on the side bar.
 #               If a field is blank the icon and link will not appear, otherwise it will be shown.
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
-  name             : "Your Sidebar Name"
+  avatar           : "ayenew-yihune-demeke.jpg"
+  name             : "Ayenew Yihune Demeke"
+  scholar_name     : "Demeke, Ayenew Yihune"   # must match the "Last, First" form used in _publications authors lists
   pronouns         : # example: "she/her"  
-  bio              : "Short biography for the left-hand sidebar"
-  location         : "Earth"
-  employer         : "Red Brick University"
+  bio              : "PhD student, construction automation, IoT, BIM, and reality capture"
+  location         : "Fargo, North Dakota, USA"
+  employer         : "North Dakota State University"
   uri              : # URL
-  email            : "none@example.org" 
+  email            : "ayenew.demeke@ndsu.edu"
 
   # Academic websites
   academia         : # URL
   arxiv            : # URL - Update with the correct link to your profile
-  googlescholar    : "https://scholar.google.com/citations?user=PS_CX0AAAAAJ"
+  googlescholar    : "https://scholar.google.com/citations?user=utDoBioAAAAJ"
   inspire-hep      : # URL
   impactstory      : # URL
-  orcid            : "https://orcid.org/yourorcidurl"
+  orcid            : "https://orcid.org/0000-0003-0635-6609"
   semantic         : # URL
   ssrn             : # URL
-  pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
-  researchgate     : # URL
+  pubmed           : # URL
+  researchgate     : "https://www.researchgate.net/profile/Ayenew-Demeke"
   scopus           : # URL
   zotero           : # URL
 
@@ -51,13 +52,13 @@ author:
   bitbucket        : # Username - Update with your username on the site
   codepen          : # Username
   dribbble         : # Username
-  github           : "academicpages"
+  github           : "ayenewdemeke"
   kaggle           : # Username  
   stackoverflow    : # User number or user number and name (i.e., use "1" or "1/jeff-atwood")    
 
   # Social media
   artstation       : # Username
-  bluesky          : "bsky.app" # Replace this with you Bluesky username
+  bluesky          : # Bluesky username
   facebook         : # Username
   flickr           : # Username
   foursquare       : # Username
@@ -66,7 +67,7 @@ author:
   keybase          : # Username
   instagram        : # Username
   lastfm           : # Username
-  linkedin         : # Username
+  linkedin         : "ayenew-yihune"
   mastodon         : # URL
   medium           : # URL
   pinterest        : # Username
@@ -151,6 +152,11 @@ social:
   type                   : # Person or Organization (defaults to Person)
   name                   : # If the user or organization name differs from the site's name
   links: # An array of links to social media profiles
+    - "https://orcid.org/0000-0003-0635-6609"
+    - "https://scholar.google.com/citations?user=utDoBioAAAAJ"
+    - "https://www.researchgate.net/profile/Ayenew-Demeke"
+    - "https://www.linkedin.com/in/ayenew-yihune/"
+    - "https://github.com/ayenewdemeke"
 
 
 # Analytics
@@ -188,6 +194,14 @@ exclude:
   - log
   - node_modules
   - package.json*
+  - AGENTS.md
+  - CLAUDE.md
+  - README.md
+  - Dockerfile
+  - docker-compose.yaml
+  - _config_docker.yml
+  - .devcontainer
+  - scripts
   - Rakefile
   - README
   - tmp
@@ -221,16 +235,7 @@ kramdown:
 
 # These settings control the types of collections used by the template
 collections:
-  teaching:
-    output: true
-    permalink: /:collection/:path/
   publications:
-    output: true
-    permalink: /:collection/:path/
-  portfolio:
-    output: true
-    permalink: /:collection/:path/
-  talks:
     output: true
     permalink: /:collection/:path/
 
@@ -256,40 +261,17 @@ defaults:
       layout: single
       author_profile: true
   # _teaching
-  - scope:
-      path: ""
-      type: teaching
-    values:
-      layout: single
-      author_profile: true
-      share: true
-      comments: true
   # _publications
   - scope:
       path: ""
       type: publications
     values:
-      layout: single
+      layout: publication
       author_profile: true
       share: true
-      comments: true
+      comments: false
   # _portfolio
-  - scope:
-      path: ""
-      type: portfolio
-    values:
-      layout: single
-      author_profile: true
-      share: true
-      comment: true
   # _talks
-  - scope:
-      path: ""
-      type: talks
-    values:
-      layout: talk
-      author_profile: true
-      share: true
 
 
 # Sass/SCSS

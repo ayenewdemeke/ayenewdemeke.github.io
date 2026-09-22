@@ -21,3 +21,20 @@ package-lock.json
 
 # Ignore files created by MacOS
 .DS_Store
+
+# Jekyll build caches
+.jekyll-cache/
+.jekyll-metadata
+
+# Safety net: raw inputs must never be committed (they live in ../website-inputs/)
+website-inputs/
+*.docx
+*.bib.bak
+
+# Large/raw media: commit only web-optimized versions (photo <300 KB, PDFs <10 MB)
+*.psd
+*.tif
+*.tiff
+*.heic
+*.mov
+*.mp4

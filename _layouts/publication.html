@@ -1,0 +1,34 @@
+---
+layout: single
+---
+{% comment %}
+  Renders a publication page entirely from front matter (see CLAUDE.md).
+  Any Markdown in the file body is shown after the abstract.
+{% endcomment %}
+{% include base_path %}
+{% assign doi_url = page.doi | prepend: "https://doi.org/" %}
+
+<p class="pub-authors">{% for a in page.authors %}{% assign parts = a | split: ", " %}{% assign full = parts[1] | append: " " | append: parts[0] %}{% if a == site.author.scholar_name %}<strong>{{ full }}</strong>{% else %}{{ full }}{% endif %}{% unless forloop.last %}, {% endunless %}{% endfor %}</p>
+
+<p>
+  <a href="{{ doi_url }}" class="btn btn--primary">Published version (DOI: {{ page.doi }})</a>
+  {% if page.pdf %}<a href="{{ page.pdf | prepend: base_path }}" class="btn btn--inverse">Download PDF</a>{% endif %}
+  {% if page.external_pdf %}<a href="{{ page.external_pdf }}" class="btn btn--inverse">Free PDF ({{ page.external_pdf_host }})</a>{% endif %}
+</p>
+{% if page.pdf_note %}<p style="font-size: smaller"><em>{{ page.pdf_note }}</em></p>{% endif %}
+
+<h2>Summary</h2>
+<p>{{ page.excerpt | strip_html | strip }}</p>
+
+<h2>Abstract</h2>
+<p>{{ page.abstract | strip }}</p>
+
+{% if page.keywords %}<p><strong>Keywords:</strong> {{ page.keywords | join: ", " }}</p>{% endif %}
+
+{{ content }}
+
+<h2>How to cite</h2>
+<p>{{ page.citation }}</p>
+
+<h3>BibTeX</h3>
+<pre><code>{{ page.bibtex | strip | escape }}</code></pre>

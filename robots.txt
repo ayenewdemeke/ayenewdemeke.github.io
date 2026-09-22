@@ -1,0 +1,9 @@
+---
+layout: null
+sitemap: false
+---
+# All crawlers, including search engines and AI crawlers, are welcome.
+User-agent: *
+Allow: /
+
+Sitemap: {{ site.url }}/sitemap.xml
