@@ -8,4 +8,6 @@
   <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ share_url | url_encode }}" class="btn btn--linkedin" title="{{ site.data.ui-text[site.locale].share_on_label | default: 'Share on' }} LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 
   <a href="https://x.com/intent/post?url={{ share_url | url_encode }}&text={{ page.title | url_encode }}" class="btn btn--x" title="{{ site.data.ui-text[site.locale].share_on_label | default: 'Share on' }} X"><i class="fab fa-x-twitter" aria-hidden="true"></i><span> X</span></a>
+
+  <a href="mailto:?subject={{ page.title | uri_escape }}&amp;body={{ page.title | append: "%0D%0A" | append: share_url | uri_escape }}" class="btn btn--email" title="Share by email"><i class="fas fa-envelope" aria-hidden="true"></i><span> Email</span></a>
 </section>
