@@ -1,0 +1,21 @@
+{% comment %}
+  schema.org WebSite JSON-LD, home page only. This is Google's primary signal for
+  the site name shown above the link in search results.
+{% endcomment %}
+{% if page.url == "/" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ site.name | jsonify }},
+  "alternateName": {{ site.author.name | jsonify }},
+  "url": {{ site.url | append: "/" | jsonify }},
+  "publisher": {
+    "@type": "Person",
+    "name": {{ site.author.name | jsonify }},
+    "url": {{ site.url | append: "/" | jsonify }},
+    "sameAs": {{ site.social.links | jsonify }}
+  }
+}
+</script>
+{% endif %}
